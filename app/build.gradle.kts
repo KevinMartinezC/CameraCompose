@@ -40,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.2"
     }
     packaging {
         resources {
@@ -72,4 +72,13 @@ dependencies {
     implementation(libs.camera.extensions)
     implementation(libs.camera.view)
     implementation(libs.camera.video)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.savedstate)
+    implementation ("com.google.accompanist:accompanist-permissions:0.20.0")
+    implementation ("io.coil-kt:coil-compose:1.4.0")
+    implementation ("androidx.compose.material:material-icons-extended")
+
+
+
 }

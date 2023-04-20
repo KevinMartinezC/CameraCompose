@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CameraCompose</string>
+    <string name="photo_capture_succeeded">Photo capture succeeded: %1$s</string>
+    <string name="photo_capture_failed">Photo capture failed: %1$s</string>
 </resources>
