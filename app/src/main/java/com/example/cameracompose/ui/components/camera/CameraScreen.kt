@@ -1,4 +1,4 @@
-package com.example.cameracompose
+package com.example.cameracompose.ui.components.camera
 
 import android.content.Context
 import android.util.Log
@@ -26,7 +26,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import com.example.cameracompose.viewmodel.CameraViewModel
+import com.example.cameracompose.R
+import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
 import java.util.concurrent.Executors
 
 
@@ -95,7 +96,6 @@ fun PreviewView(
                     .also {
                         it.setSurfaceProvider(previewView.surfaceProvider)
                     }
-
                 imageCapture.value = ImageCapture.Builder()
                     .build()
 

@@ -1,4 +1,4 @@
-package com.example.cameracompose
+package com.example.cameracompose.ui.components.gallery
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

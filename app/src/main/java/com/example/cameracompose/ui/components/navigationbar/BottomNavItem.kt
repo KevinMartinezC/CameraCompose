@@ -1,4 +1,4 @@
-package com.example.cameracompose
+package com.example.cameracompose.ui.components.navigationbar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAPhoto

@@ -1,16 +1,17 @@
-package com.example.cameracompose
+package com.example.cameracompose.ui.components.navigationbar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.cameracompose.viewmodel.CameraViewModel
+import com.example.cameracompose.ui.components.camera.permission.CameraScreenComposable
+import com.example.cameracompose.ui.components.gallery.GalleryScreen
+import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
 
 
 @Composable

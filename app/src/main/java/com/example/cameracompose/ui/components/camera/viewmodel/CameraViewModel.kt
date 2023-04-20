@@ -1,4 +1,4 @@
-package com.example.cameracompose.viewmodel
+package com.example.cameracompose.ui.components.camera.viewmodel
 
 import android.content.ContentValues
 import android.content.Context
