@@ -1,16 +1,18 @@
 package com.example.cameracompose
 
-import android.content.ContentValues
 import android.content.Context
-import android.os.Build
-import android.provider.MediaStore
 import android.util.Log
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -23,13 +25,9 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import java.util.concurrent.Executors
-import androidx.camera.core.Preview
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import com.example.cameracompose.ui.theme.viewmodel.CameraViewModel
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.example.cameracompose.viewmodel.CameraViewModel
+import java.util.concurrent.Executors
 
 
 @Composable
@@ -78,7 +76,7 @@ fun CameraScreen(
 @Composable
 fun PreviewView(
     modifier: Modifier = Modifier,
-    viewModel: CameraViewModel // Add viewModel parameter
+    viewModel: CameraViewModel
 ) {
     LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -101,7 +99,7 @@ fun PreviewView(
                 imageCapture.value = ImageCapture.Builder()
                     .build()
 
-                viewModel.imageCapture = imageCapture.value // Set imageCapture in the ViewModel
+                viewModel.imageCapture = imageCapture.value
 
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 

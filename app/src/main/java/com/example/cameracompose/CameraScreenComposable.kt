@@ -1,6 +1,5 @@
 package com.example.cameracompose
 
-import android.graphics.Insets.add
 import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -8,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.example.cameracompose.ui.theme.viewmodel.CameraViewModel
+import com.example.cameracompose.viewmodel.CameraViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 
@@ -16,7 +15,8 @@ import com.google.accompanist.permissions.rememberPermissionState
 @Composable
 fun CameraScreenComposable(
     viewModel: CameraViewModel,
-    onGalleryClicked: () -> Unit
+    onGalleryClicked: () -> Unit,
+
 ) {
     val context = LocalContext.current
     val requiredPermissions = remember {
@@ -32,10 +32,13 @@ fun CameraScreenComposable(
     }
 
     if (allPermissionsGranted) {
+
         CameraScreen(
-            viewModel = viewModel, // Pass viewModel
-            context = context, // Pass context
-            onGalleryClicked = onGalleryClicked
+            viewModel = viewModel,
+            context = context,
+            onGalleryClicked = {
+                onGalleryClicked()
+            }
         )
     } else {
         Column {

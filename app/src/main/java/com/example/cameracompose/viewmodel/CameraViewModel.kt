@@ -1,6 +1,5 @@
-package com.example.cameracompose.ui.theme.viewmodel
+package com.example.cameracompose.viewmodel
 
-import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.os.Build
@@ -18,7 +17,7 @@ import java.util.Locale
 class CameraViewModel : ViewModel() {
     var imageCapture: ImageCapture? = null
 
-    fun takePhoto(context: Context) {
+    private fun takePhoto(context: Context) {
         val imageCapture = imageCapture ?: return
 
         val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
