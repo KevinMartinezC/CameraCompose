@@ -1,7 +1,9 @@
 package com.example.cameracompose.ui.components.camera.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.location.Location
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
@@ -10,13 +12,24 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.cameracompose.R
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class CameraViewModel : ViewModel() {
     var imageCapture: ImageCapture? = null
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+    fun initLocationProvider(context: Context) {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+    }
+
+
+    @SuppressLint("MissingPermission")
     private fun takePhoto(context: Context) {
         val imageCapture = imageCapture ?: return
 
@@ -30,31 +43,45 @@ class CameraViewModel : ViewModel() {
             }
         }
 
-        val outputOptions = ImageCapture.OutputFileOptions
-            .Builder(
-                context.contentResolver,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues
-            )
-            .build()
-
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(context),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, context.getString(R.string.photo_capture_failed, exc.message), exc)
+        // Get the last known location
+        viewModelScope.launch {
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: Location? ->
+                // Create an ImageCapture.Metadata object and set its location
+                val metadata = ImageCapture.Metadata().apply {
+                    this.location = location
                 }
 
-                override fun
-                        onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val msg = context.getString(R.string.photo_capture_succeeded, output.savedUri)
-                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, msg)
-                }
+                // Create output options and include metadata
+                val outputOptions = ImageCapture.OutputFileOptions
+                    .Builder(
+                        context.contentResolver,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        contentValues
+                    )
+                    .setMetadata(metadata) // Set metadata here
+                    .build()
+
+                // Pass the metadata object when calling the takePicture function
+                imageCapture.takePicture(
+                    outputOptions,
+                    ContextCompat.getMainExecutor(context),
+                    object : ImageCapture.OnImageSavedCallback {
+                        override fun onError(exc: ImageCaptureException) {
+                            Log.e(TAG, context.getString(R.string.photo_capture_failed, exc.message), exc)
+                        }
+
+                        override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                            val msg = context.getString(R.string.photo_capture_succeeded, output.savedUri)
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                            Log.d(TAG, msg)
+                        }
+                    }
+                )
             }
-        )
+        }
     }
+
+
 
     fun onCaptureButtonClicked(context: Context) {
         takePhoto(context)

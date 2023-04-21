@@ -25,7 +25,13 @@ fun CameraScreenComposable(
 ) {
     val context = LocalContext.current
     val requiredPermissions = remember {
-        mutableListOf(android.Manifest.permission.CAMERA).apply {
+        mutableListOf(
+            android.Manifest.permission.CAMERA,
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+
+
+        ).apply {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 add(android.Manifest.permission.READ_MEDIA_IMAGES)
             }
@@ -39,6 +45,7 @@ fun CameraScreenComposable(
     val showSettingsDialog = remember { mutableStateOf(false) }
 
     if (allPermissionsGranted) {
+        viewModel.initLocationProvider(context)
         CameraScreen(
             viewModel = viewModel,
             context = context,
