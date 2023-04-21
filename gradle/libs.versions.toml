@@ -1,5 +1,5 @@
 [versions]
-com-android-application = "8.1.0-alpha10"
+com-android-application = "8.1.0-beta01"
 org-jetbrains-kotlin-android = "1.8.10"
 core-ktx = "1.9.0"
 junit = "4.13.2"
@@ -39,6 +39,7 @@ camera-extensions={ group="androidx.camera", name = "camera-extensions", version
 lifecycle_viewmodel_ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle_livedata_ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 lifecycle_viewmodel_savedstate = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
+androidx-paging-common-ktx = { group = "androidx.paging", name = "paging-common-ktx", version = "3.1.1" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }

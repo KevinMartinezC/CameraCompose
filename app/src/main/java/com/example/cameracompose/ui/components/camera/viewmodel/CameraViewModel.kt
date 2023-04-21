@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.location.Location
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
@@ -16,7 +17,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.cameracompose.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -27,7 +31,6 @@ class CameraViewModel : ViewModel() {
     fun initLocationProvider(context: Context) {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
     }
-
 
     @SuppressLint("MissingPermission")
     private fun takePhoto(context: Context) {
@@ -58,10 +61,9 @@ class CameraViewModel : ViewModel() {
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         contentValues
                     )
-                    .setMetadata(metadata) // Set metadata here
+                    .setMetadata(metadata)
                     .build()
 
-                // Pass the metadata object when calling the takePicture function
                 imageCapture.takePicture(
                     outputOptions,
                     ContextCompat.getMainExecutor(context),
@@ -81,17 +83,28 @@ class CameraViewModel : ViewModel() {
         }
     }
 
-
-
     fun onCaptureButtonClicked(context: Context) {
         takePhoto(context)
-        Log.d("foto", "jjd")
     }
+
+
+
+    fun getImagesFromGallery(): StateFlow<List<File>> {
+        val imagesStateFlow = MutableStateFlow<List<File>>(emptyList())
+        val imageFolder = File(Environment.getExternalStorageDirectory(), CAMERAX_IMAGE_FOLDER)
+        val imageFiles = imageFolder.listFiles()?.filter { it.extension == IMAGE_EXTENSION }?.toList() ?: emptyList()
+
+        imagesStateFlow.value = imageFiles
+        return imagesStateFlow
+    }
+
 
     companion object {
         private const val TAG = "CameraXApp"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val CAMERAX_IMAGE_FOLDER = "Pictures/CameraX-Image"
         private const val JPEG_MIME_TYPE = "image/jpeg"
+        private const val IMAGE_EXTENSION = "jpg"
+
     }
 }

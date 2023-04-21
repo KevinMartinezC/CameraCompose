@@ -23,7 +23,7 @@ fun BottomNavGraph(navController: NavHostController, showBottomBar: MutableState
         startDestination = BottomNavItem.Gallery.route
     ) {
         composable(route = BottomNavItem.Gallery.route) {
-            GalleryScreen()
+            GalleryScreen(cameraViewModel)
         }
         composable(route = BottomNavItem.Camera.route) {
             CameraScreenComposable(

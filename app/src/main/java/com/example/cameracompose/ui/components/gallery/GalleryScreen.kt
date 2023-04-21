@@ -4,13 +4,24 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
+import com.example.cameracompose.R
+import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
 
 @Composable
-fun GalleryScreen() {
+fun GalleryScreen(cameraViewModel: CameraViewModel) {
+    val images = cameraViewModel.getImagesFromGallery().collectAsState(emptyList())
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "This is the Gallery Screen", fontSize = 24.sp)
+        if (images.value.isEmpty()) {
+            Text(text = stringResource(R.string.no_images_in_the_gallery), fontSize = 24.sp)
+        } else {
+            GalleryDesign(images = images.value)
+        }
     }
 }
+

@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+    implementation(libs.androidx.paging.common.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -80,6 +81,8 @@ dependencies {
     implementation ("androidx.compose.material:material-icons-extended")
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.google.accompanist:accompanist-pager:0.13.0")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.13.0")
 
 
 
