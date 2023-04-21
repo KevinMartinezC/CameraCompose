@@ -83,6 +83,10 @@ dependencies {
     implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation ("com.google.accompanist:accompanist-pager:0.13.0")
     implementation ("com.google.accompanist:accompanist-pager-indicators:0.13.0")
+    implementation ("com.google.maps.android:maps-compose:2.11.0")
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+    implementation ("androidx.exifinterface:exifinterface:1.3.3")
+
 
 
 

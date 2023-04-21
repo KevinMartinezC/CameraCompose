@@ -45,7 +45,6 @@ fun CameraScreen(
             modifier = Modifier.fillMaxSize(),
             viewModel = viewModel
         )
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -61,7 +60,6 @@ fun CameraScreen(
                     contentDescription = null
                 )
             }
-
             FloatingActionButton(
                 onClick = onGalleryClicked,
             ) {

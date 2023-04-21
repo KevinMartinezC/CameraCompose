@@ -7,20 +7,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
-import com.example.cameracompose.R
+import androidx.navigation.NavHostController
 import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
 
 @Composable
-fun GalleryScreen(cameraViewModel: CameraViewModel) {
+fun GalleryScreen(cameraViewModel: CameraViewModel, navController: NavHostController) {
     val images = cameraViewModel.getImagesFromGallery().collectAsState(emptyList())
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         if (images.value.isEmpty()) {
-            Text(text = stringResource(R.string.no_images_in_the_gallery), fontSize = 24.sp)
+            Text(text = "No images in the gallery", fontSize = 24.sp)
         } else {
-            GalleryDesign(images = images.value)
+            GalleryDesign(images = images.value,navController = navController
+            )
         }
     }
 }
