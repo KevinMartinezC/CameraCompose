@@ -20,10 +20,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.exifinterface.media.ExifInterface
 import coil.compose.rememberImagePainter
+import com.example.cameracompose.R
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -35,7 +37,6 @@ import java.io.IOException
 
 @Composable
 fun DetailScreen(name: String) {
-
 
     val painter = rememberImagePainter(
         data = File("/storage/emulated/0/Pictures/CameraX-Image/${name}"),
@@ -55,7 +56,7 @@ fun DetailScreen(name: String) {
     Column(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
         Image(
             painter = painter,
-            contentDescription = "Detailed Image",
+            contentDescription = stringResource(R.string.detailed_image),
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.5f)
@@ -79,44 +80,3 @@ fun DetailScreen(name: String) {
     }
 }
 
-@Composable
-fun CustomGoogleMap(modifier: Modifier = Modifier, initialLocation: Location) {
-    val singapore = LatLng(initialLocation.latitude, initialLocation.longitude)
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(singapore, 10f)
-    }
-    Card(
-        modifier = modifier.fillMaxSize(),
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
-    ) {
-        GoogleMap(
-            modifier = Modifier.fillMaxSize(),
-            cameraPositionState = cameraPositionState
-        ) {
-            Marker(
-                state = MarkerState(position = singapore),
-                title = "Selected location",
-                snippet = "Marker at selected location"
-            )
-        }
-    }
-}
-fun getLocationFromImage(file: File): Location? {
-    return try {
-        val exifInterface = ExifInterface(file.path)
-        val latLong = exifInterface.latLong
-
-        if (latLong != null) {
-            Location("").apply {
-                latitude = latLong[0]
-                longitude = latLong[1]
-            }
-        } else {
-            null
-        }
-    } catch (e: IOException) {
-        Log.e(TAG, "Error reading EXIF data", e)
-        null
-    }
-}

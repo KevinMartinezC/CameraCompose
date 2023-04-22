@@ -33,7 +33,7 @@ fun BottomNavGraph(navController: NavHostController, showBottomBar: MutableState
             )
         }
         composable(route = "detail/{imagePath}") { entry ->
-            val name = entry.arguments?.getString("imagePath") ?: ""
+            val name = entry.arguments?.getString("imagePath").orEmpty()
             DetailScreen(name = name)
         }
     }

@@ -49,12 +49,10 @@ class CameraViewModel : ViewModel() {
         // Get the last known location
         viewModelScope.launch {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: Location? ->
-                // Create an ImageCapture.Metadata object and set its location
                 val metadata = ImageCapture.Metadata().apply {
                     this.location = location
                 }
 
-                // Create output options and include metadata
                 val outputOptions = ImageCapture.OutputFileOptions
                     .Builder(
                         context.contentResolver,
@@ -87,8 +85,6 @@ class CameraViewModel : ViewModel() {
         takePhoto(context)
     }
 
-
-
     fun getImagesFromGallery(): StateFlow<List<File>> {
         val imagesStateFlow = MutableStateFlow<List<File>>(emptyList())
         val imageFolder = File(Environment.getExternalStorageDirectory(), CAMERAX_IMAGE_FOLDER)
@@ -98,13 +94,13 @@ class CameraViewModel : ViewModel() {
         return imagesStateFlow
     }
 
-
     companion object {
         private const val TAG = "CameraXApp"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val CAMERAX_IMAGE_FOLDER = "Pictures/CameraX-Image"
         private const val JPEG_MIME_TYPE = "image/jpeg"
         private const val IMAGE_EXTENSION = "jpg"
+        const val PACKAGE = "package"
 
     }
 }

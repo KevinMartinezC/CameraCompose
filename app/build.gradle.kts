@@ -86,6 +86,8 @@ dependencies {
     implementation ("com.google.maps.android:maps-compose:2.11.0")
     implementation ("com.google.android.gms:play-services-maps:18.1.0")
     implementation ("androidx.exifinterface:exifinterface:1.3.3")
+    implementation ("androidx.compose.foundation:foundation:1.0.4")
+
 
 
 
