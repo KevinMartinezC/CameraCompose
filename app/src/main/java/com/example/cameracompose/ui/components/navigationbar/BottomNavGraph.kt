@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cameracompose.ui.components.camera.permission.CameraScreenComposable
 import com.example.cameracompose.ui.components.gallery.GalleryScreen
-import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel
 import com.example.cameracompose.ui.components.detail.DetailScreen
 
 
@@ -34,7 +34,7 @@ fun BottomNavGraph(navController: NavHostController, showBottomBar: MutableState
         }
         composable(route = "detail/{imagePath}") { entry ->
             val name = entry.arguments?.getString("imagePath").orEmpty()
-            DetailScreen(name = name)
+            DetailScreen(name = name, viewModel = cameraViewModel)
         }
     }
 

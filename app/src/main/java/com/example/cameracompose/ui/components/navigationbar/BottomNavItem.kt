@@ -16,6 +16,7 @@ sealed class BottomNavItem(
         title = "Gallery",
         icon = Icons.Default.AddPhotoAlternate
     )
+    
     object Camera : BottomNavItem(
         route = "home",
         title = "Home",

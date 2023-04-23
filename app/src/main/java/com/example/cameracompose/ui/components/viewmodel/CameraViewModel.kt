@@ -1,17 +1,21 @@
-package com.example.cameracompose.ui.components.camera.viewmodel
+package com.example.cameracompose.ui.components.viewmodel
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.core.content.ContextCompat
+import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cameracompose.R
@@ -21,6 +25,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -31,6 +36,16 @@ class CameraViewModel : ViewModel() {
     fun initLocationProvider(context: Context) {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
     }
+
+    val requiredPermissions = mutableListOf(
+        android.Manifest.permission.CAMERA,
+        android.Manifest.permission.ACCESS_FINE_LOCATION,
+        android.Manifest.permission.ACCESS_COARSE_LOCATION
+    ).apply {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            add(android.Manifest.permission.READ_MEDIA_IMAGES)
+        }
+    }.toTypedArray()
 
     @SuppressLint("MissingPermission")
     private fun takePhoto(context: Context) {
@@ -94,6 +109,40 @@ class CameraViewModel : ViewModel() {
         return imagesStateFlow
     }
 
+    fun getLocationFromImage(file: File): Location? {
+        return try {
+            val exifInterface = ExifInterface(file.path)
+            val latLong = exifInterface.latLong
+
+            if (latLong != null) {
+                Location("").apply {
+                    latitude = latLong[0]
+                    longitude = latLong[1]
+                }
+            } else {
+                null
+            }
+        } catch (e: IOException) {
+            Log.e(ContentValues.TAG, "Error reading EXIF data", e)
+            null
+        }
+    }
+
+    fun getImagePath(name: String): String {
+        return IMAGE_PATH + name
+    }
+
+    fun getImageFile(name: String): File {
+        return File(IMAGE_PATH + name)
+    }
+
+    fun openAppSettings(context: Context) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.fromParts(PACKAGE, context.packageName, null)
+        }
+        context.startActivity(intent)
+    }
+
     companion object {
         private const val TAG = "CameraXApp"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
@@ -101,6 +150,7 @@ class CameraViewModel : ViewModel() {
         private const val JPEG_MIME_TYPE = "image/jpeg"
         private const val IMAGE_EXTENSION = "jpg"
         const val PACKAGE = "package"
+        const val IMAGE_PATH = "/storage/emulated/0/Pictures/CameraX-Image/"
 
     }
 }

@@ -11,11 +11,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.cameracompose.R
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel
 
 @Composable
 fun ShowSettingsDialog(
     showDialog: MutableState<Boolean>,
-    onGalleryClicked: () -> Unit
+    onGalleryClicked: () -> Unit,
+    viewModel: CameraViewModel
 ) {
     val context = LocalContext.current
     AlertDialog(
@@ -32,7 +34,7 @@ fun ShowSettingsDialog(
             TextButton(
                 onClick = {
                     showDialog.value = false
-                    openAppSettings(context)
+                    viewModel.openAppSettings(context)
                 }
             ) {
                 Text(stringResource(R.string.settings))

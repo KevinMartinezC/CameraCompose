@@ -20,9 +20,9 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun CustomGoogleMap(modifier: Modifier = Modifier, initialLocation: Location) {
-    val singapore = LatLng(initialLocation.latitude, initialLocation.longitude)
+    val locationPhoto = LatLng(initialLocation.latitude, initialLocation.longitude)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(singapore, 10f)
+        position = CameraPosition.fromLatLngZoom(locationPhoto, 10f)
     }
     Card(
         modifier = modifier.fillMaxSize(),
@@ -34,10 +34,11 @@ fun CustomGoogleMap(modifier: Modifier = Modifier, initialLocation: Location) {
             cameraPositionState = cameraPositionState
         ) {
             Marker(
-                state = MarkerState(position = singapore),
+                state = MarkerState(position = locationPhoto),
                 title = stringResource(R.string.selected_location),
                 snippet = stringResource(R.string.marker_at_selected_location)
             )
         }
     }
 }
+

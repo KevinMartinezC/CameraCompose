@@ -10,18 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import com.example.cameracompose.R
-import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
-import com.example.cameracompose.ui.components.gallery.GalleryScreen
-import java.io.File
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel
 
 
 @Composable
