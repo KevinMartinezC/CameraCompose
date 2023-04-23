@@ -9,8 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.cameracompose.R
 import com.example.cameracompose.ui.components.viewmodel.CameraViewModel
@@ -36,14 +36,14 @@ fun DetailScreen(name: String, viewModel: CameraViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.5f)
-                .padding(8.dp),
+                .padding(dimensionResource(R.dimen.padding_8dp)),
             contentScale = ContentScale.Crop
         )
         if (location != null) {
             CustomGoogleMap(
                 modifier = Modifier
                     .weight(0.5f)
-                    .padding(8.dp),
+                    .padding(dimensionResource(R.dimen.padding_8dp)),
                 initialLocation = location
             )
         }

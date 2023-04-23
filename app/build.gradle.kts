@@ -76,20 +76,16 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.savedstate)
-    implementation ("com.google.accompanist:accompanist-permissions:0.20.0")
-    implementation ("io.coil-kt:coil-compose:1.4.0")
-    implementation ("androidx.compose.material:material-icons-extended")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
-    implementation ("com.google.android.gms:play-services-location:21.0.1")
-    implementation ("com.google.accompanist:accompanist-pager:0.13.0")
-    implementation ("com.google.accompanist:accompanist-pager-indicators:0.13.0")
-    implementation ("com.google.maps.android:maps-compose:2.11.0")
-    implementation ("com.google.android.gms:play-services-maps:18.1.0")
-    implementation ("androidx.exifinterface:exifinterface:1.3.3")
-    implementation ("androidx.compose.foundation:foundation:1.0.4")
-
-
-
-
+    implementation(libs.accompanist.permissions)
+    implementation(libs.coil.compose)
+    implementation(libs.material.icons.extended)
+    implementation(libs.navigation.compose)
+    implementation(libs.play.services.location)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
+    implementation(libs.exifinterface)
+    implementation(libs.foundation)
 
 }

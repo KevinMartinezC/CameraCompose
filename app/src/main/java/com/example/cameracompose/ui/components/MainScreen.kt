@@ -6,7 +6,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.cameracompose.ui.components.navigationbar.BottomBar
 import com.example.cameracompose.ui.components.navigationbar.BottomNavGraph
@@ -17,6 +16,7 @@ import com.example.cameracompose.ui.components.navigationbar.BottomNavGraph
 fun MainScreen() {
     val navController = rememberNavController()
     val showBottomBar = remember { mutableStateOf(true) }
+
     Scaffold(bottomBar = {
         if (showBottomBar.value) {
             BottomBar(navController = navController)

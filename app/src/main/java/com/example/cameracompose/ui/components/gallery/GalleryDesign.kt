@@ -15,14 +15,15 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.cameracompose.R
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel.Companion.DEFAULT_GALLERY_COLUMNS
 import java.io.File
 
 
@@ -31,8 +32,8 @@ fun GalleryDesign(
     images: List<File>,
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    columns: Int = 2,
-    spacing: Dp = 8.dp
+    columns: Int = DEFAULT_GALLERY_COLUMNS,
+    spacing: Dp = dimensionResource(R.dimen.spacing_8dp)
 ) {
     val imageModifier = Modifier
         .padding(spacing / 2)
@@ -47,9 +48,9 @@ fun GalleryDesign(
             val image = images[index]
             Card(
                 elevation = CardDefaults.cardElevation(
-                    defaultElevation = 10.dp
+                    defaultElevation = dimensionResource(R.dimen.elevation_10dp)
                 ),
-                shape = RoundedCornerShape(4.dp),
+                shape = RoundedCornerShape(dimensionResource(R.dimen.corner_radius_4dp)),
                 modifier = imageModifier
                     .clickable { navController.navigate("detail/${image.name}") }
             ) {

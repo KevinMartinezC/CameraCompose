@@ -82,11 +82,16 @@ class CameraViewModel : ViewModel() {
                     ContextCompat.getMainExecutor(context),
                     object : ImageCapture.OnImageSavedCallback {
                         override fun onError(exc: ImageCaptureException) {
-                            Log.e(TAG, context.getString(R.string.photo_capture_failed, exc.message), exc)
+                            Log.e(
+                                TAG,
+                                context.getString(R.string.photo_capture_failed, exc.message),
+                                exc
+                            )
                         }
 
                         override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                            val msg = context.getString(R.string.photo_capture_succeeded, output.savedUri)
+                            val msg =
+                                context.getString(R.string.photo_capture_succeeded, output.savedUri)
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                             Log.d(TAG, msg)
                         }
@@ -103,7 +108,9 @@ class CameraViewModel : ViewModel() {
     fun getImagesFromGallery(): StateFlow<List<File>> {
         val imagesStateFlow = MutableStateFlow<List<File>>(emptyList())
         val imageFolder = File(Environment.getExternalStorageDirectory(), CAMERAX_IMAGE_FOLDER)
-        val imageFiles = imageFolder.listFiles()?.filter { it.extension == IMAGE_EXTENSION }?.toList() ?: emptyList()
+        val imageFiles =
+            imageFolder.listFiles()?.filter { it.extension == IMAGE_EXTENSION }?.toList()
+                ?: emptyList()
 
         imagesStateFlow.value = imageFiles
         return imagesStateFlow
@@ -151,6 +158,9 @@ class CameraViewModel : ViewModel() {
         private const val IMAGE_EXTENSION = "jpg"
         const val PACKAGE = "package"
         const val IMAGE_PATH = "/storage/emulated/0/Pictures/CameraX-Image/"
+        const val DETAIL_ROUTE = "detail/{imagePath}"
+        const val ROUTE_ARGUMENT_IMAGE_KEY = "imagePath"
+        const val DEFAULT_GALLERY_COLUMNS = 2
 
     }
 }

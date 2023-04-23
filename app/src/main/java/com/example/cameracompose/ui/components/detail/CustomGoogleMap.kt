@@ -8,8 +8,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.cameracompose.R
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -26,8 +26,8 @@ fun CustomGoogleMap(modifier: Modifier = Modifier, initialLocation: Location) {
     }
     Card(
         modifier = modifier.fillMaxSize(),
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.corner_radius_8dp)),
+        border = BorderStroke(dimensionResource(R.dimen.border_stroke_1dp), MaterialTheme.colorScheme.primary),
     ) {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
