@@ -2,14 +2,13 @@ package com.example.musicplayercompose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-//Dark colors
+//Dark colors0x7f060014
 val DarkPrimary = Color(0xFFAEC6FF)
 val DarkOnPrimary = Color(0xFF002E6A)
 val DarkPrimaryContainer = Color(0xFF12448F)
 val DarkOnPrimaryContainer = Color(0xFFD8E2FF)
 val DarkSecondary = Color(0xFF4FD8EB)
 val DarkOnSecondary = Color(0xFF00363D)
-val DarkSecondaryContainer = Color(0xFF004F58)
 val DarkOnSecondaryContainer = Color(0xFF97F0FF)
 val DarkTertiary = Color(0xFF92CCFF)
 val DarkOnTertiary = Color(0xFF003351)
@@ -29,7 +28,6 @@ val DarkOutline = Color(0xFF8E9099)
 val DarkInverseSurface = Color(0xFFE3E2E6)
 val DarkInverseOnSurface = Color(0xFF1B1B1F)
 val DarkInversePrimary = Color(0xFF325CA8)
-val DarkShadow = Color(0xFF000000)
 val DarkSurfaceTint = Color(0xFFAEC6FF)
 val DarkOutlineVariant = Color(0xFF44474F)
 val DarkScrim = Color(0xFF000000)

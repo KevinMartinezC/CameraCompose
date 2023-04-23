@@ -1,6 +1,5 @@
 package com.example.cameracompose.ui.components.camera.permission
 
-import android.os.Build
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -12,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.cameracompose.ui.components.camera.CameraScreen
-import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 
@@ -24,22 +23,8 @@ fun CameraScreenComposable(
     onGalleryClicked: () -> Unit
 ) {
     val context = LocalContext.current
-    val requiredPermissions = remember {
-        mutableListOf(
-            android.Manifest.permission.CAMERA,
-            android.Manifest.permission.ACCESS_FINE_LOCATION,
-            android.Manifest.permission.ACCESS_COARSE_LOCATION
-
-        ).apply {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                add(android.Manifest.permission.READ_MEDIA_IMAGES)
-            }
-        }.toTypedArray()
-    }
-
-    val permissionStates = requiredPermissions.map { rememberPermissionState(it) }
+    val permissionStates = viewModel.requiredPermissions.map { rememberPermissionState(it) }
     val allPermissionsGranted = permissionStates.all { it.hasPermission }
-
     val showDialog = remember { mutableStateOf(false) }
     val showSettingsDialog = remember { mutableStateOf(false) }
 
@@ -70,7 +55,8 @@ fun CameraScreenComposable(
         } else if (showSettingsDialog.value) {
             ShowSettingsDialog(
                 showDialog = showSettingsDialog,
-                onGalleryClicked = onGalleryClicked
+                onGalleryClicked = onGalleryClicked,
+                viewModel = viewModel
             )
         } else {
             Box(

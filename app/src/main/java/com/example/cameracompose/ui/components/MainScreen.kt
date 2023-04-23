@@ -16,6 +16,7 @@ import com.example.cameracompose.ui.components.navigationbar.BottomNavGraph
 fun MainScreen() {
     val navController = rememberNavController()
     val showBottomBar = remember { mutableStateOf(true) }
+
     Scaffold(bottomBar = {
         if (showBottomBar.value) {
             BottomBar(navController = navController)
@@ -24,4 +25,3 @@ fun MainScreen() {
         BottomNavGraph(navController = navController, showBottomBar = showBottomBar)
     }
 }
-

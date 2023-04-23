@@ -9,13 +9,14 @@ sealed class BottomNavItem(
     val route: String,
     val title: String,
     val icon: ImageVector
-){
+) {
 
     object Gallery : BottomNavItem(
         route = "gallery",
         title = "Gallery",
         icon = Icons.Default.AddPhotoAlternate
     )
+
     object Camera : BottomNavItem(
         route = "home",
         title = "Home",

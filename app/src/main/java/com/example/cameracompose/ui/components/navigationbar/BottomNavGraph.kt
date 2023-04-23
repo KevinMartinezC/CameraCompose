@@ -11,7 +11,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cameracompose.ui.components.camera.permission.CameraScreenComposable
 import com.example.cameracompose.ui.components.gallery.GalleryScreen
-import com.example.cameracompose.ui.components.camera.viewmodel.CameraViewModel
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel
+import com.example.cameracompose.ui.components.detail.DetailScreen
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel.Companion.DETAIL_ROUTE
+import com.example.cameracompose.ui.components.viewmodel.CameraViewModel.Companion.ROUTE_ARGUMENT_IMAGE_KEY
 
 
 @Composable
@@ -23,12 +26,21 @@ fun BottomNavGraph(navController: NavHostController, showBottomBar: MutableState
         startDestination = BottomNavItem.Gallery.route
     ) {
         composable(route = BottomNavItem.Gallery.route) {
-            GalleryScreen(cameraViewModel)
+            GalleryScreen(
+                cameraViewModel, navController
+            )
         }
         composable(route = BottomNavItem.Camera.route) {
             CameraScreenComposable(
                 viewModel = cameraViewModel,
                 onGalleryClicked = { navController.navigate(BottomNavItem.Gallery.route) }
+            )
+        }
+        composable(route = DETAIL_ROUTE) { entry ->
+            val name = entry.arguments?.getString(ROUTE_ARGUMENT_IMAGE_KEY).orEmpty()
+            DetailScreen(
+                name = name,
+                viewModel = cameraViewModel
             )
         }
     }
