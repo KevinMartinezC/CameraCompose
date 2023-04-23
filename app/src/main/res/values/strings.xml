@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">CameraCompose</string>
+    <string name="app_name">Camera</string>
+    <string name="photo_capture_succeeded">Photo capture succeeded: %1$s</string>
+    <string name="photo_capture_failed">Photo capture failed: %1$s</string>
+    <string name="require_permission_to_function_properly">This app requires Camera Read Media Images and location permissions to function properly.</string>
+    <string name="permission_required">Permission required</string>
+    <string name="ok">OK</string>
+    <string name="close">Close</string>
+    <string name="go_to_settings">This section requires Camera, Read Media Images and location permissions to function properly</string>
+    <string name="settings">settings</string>
+    <string name="gallery_image">Gallery Image</string>
+    <string name="no_images_in_the_gallery">No images in the gallery</string>
+    <string name="navigation_icon">Navigation Icon</string>
+    <string name="selected_location">Selected location</string>
+    <string name="marker_at_selected_location">Marker at selected location</string>
+    <string name="detailed_image">Detailed Image</string>
 </resources>

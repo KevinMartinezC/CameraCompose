@@ -1,41 +1,44 @@
-package com.example.cameracompose
+package com.example.cameracompose.ui.components.camera
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.example.cameracompose.R
 
 
 @Composable
-fun CameraScreen(onCaptureClicked: () -> Unit, onGalleryClicked: () -> Unit) {
+fun CameraFABs(
+    onCaptureButtonClicked: () -> Unit,
+    onGalleryClicked: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        PreviewView(modifier = Modifier.fillMaxSize())
-
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
+                .padding(bottom = dimensionResource(R.dimen.padding_16dp))
                 .align(Alignment.BottomCenter),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.spacing_32dp))
         ) {
             FloatingActionButton(
-                onClick = onCaptureClicked,
-
+                onClick = onCaptureButtonClicked,
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.outline_camera_24),
                     contentDescription = null
                 )
             }
-
             FloatingActionButton(
                 onClick = onGalleryClicked,
             ) {
@@ -48,13 +51,11 @@ fun CameraScreen(onCaptureClicked: () -> Unit, onGalleryClicked: () -> Unit) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun CameraScreenPreview() {
-    CameraScreen(onCaptureClicked = {}, onGalleryClicked = {})
-}
-
-@Composable
-fun PreviewView(modifier: Modifier = Modifier) {
-    // Implement your camera preview here
+fun CameraFABsPreview() {
+    CameraFABs(
+        onCaptureButtonClicked = { /* No action */ },
+        onGalleryClicked = { /* No action */ }
+    )
 }

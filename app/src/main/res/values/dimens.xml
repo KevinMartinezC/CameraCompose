@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_32dp">32dp</dimen>
+    <dimen name="spacing_8dp">8dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="corner_radius_8dp">8dp</dimen>
+    <dimen name="corner_radius_4dp">4dp</dimen>
+    <dimen name="border_stroke_1dp">1dp</dimen>
+    <dimen name="elevation_10dp">10dp</dimen>
+</resources>
